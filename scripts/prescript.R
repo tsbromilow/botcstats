@@ -234,7 +234,56 @@ size_games <- summary_by_size %>% arrange(desc(Games)) %>%
   slice(1) %>%
   pull(Games)
 
-
+totals_table <-     reactable(totals,
+                              columns = list(
+                                Name = colDef(align = "left", minWidth = 130),
+                                "Games Played" = colDef(align = "center", minWidth = 120),
+                                "Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),
+                                "Good Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),
+                                "Evil Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),
+                                "Good Games"   = colDef(align = "center", minWidth = 110),
+                                "Evil Games"    = colDef(align = "center"),
+                                Wins    = colDef(align = "center"),
+                                "Good Wins"     = colDef(align = "center"),
+                                "Evil Wins"     = colDef(align = "center")
+                              ),
+                              pagination = FALSE,
+                              searchable = FALSE,
+                              outlined = FALSE,
+                              striped = TRUE,
+                              highlight = TRUE,
+                              onClick = "select",
+                              rowStyle = JS("function(rowInfo) {
+                      if (rowInfo.expanded) {
+                        return { backgroundColor: '#C2504E', color: '#0F1115' };
+                      }
+                    }
+                  "),
+                              rowClass = JS("function(rowInfo) {
+                      return rowInfo.expanded ? 'is-expanded' : '';
+                    }
+                  "),
+                              details = function(index) {
+                                name_data <- inline[inline$Name == totals$Name[index], ]
+                                htmltools::div(reactable(
+                                  name_data,
+                                  outlined = FALSE,
+                                  pagination = FALSE,
+                                  searchable = FALSE,
+                                  compact = TRUE,
+                                  striped = TRUE,
+                                  highlight = TRUE,
+                                  columns = list(
+                                    Name = colDef(show = FALSE),
+                                    Game    = colDef(align = "left"),
+                                    Role   = colDef(align = "center"),
+                                    Alignment    = colDef(align = "center"),
+                                    "Won?"     = colDef(align = "center"),
+                                    Script     = colDef(align = "center")
+                                  )
+                                ))
+                              }
+)
 
 
 

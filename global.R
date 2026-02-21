@@ -1,5 +1,4 @@
 library(shiny)
-library(sass)
 library(bslib)
 library(dplyr)
 library(tidyr)
@@ -12,8 +11,10 @@ library(reactable)
 library(htmltools)
 library(htmlwidgets)
 
-source("theme.R")
-source("prescript.R")
+options(sass.cache=FALSE)
+
+source("scripts/theme.R")
+source("scripts/prescript.R")
 source("ui.R")
 source("server.R")
 

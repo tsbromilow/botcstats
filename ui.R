@@ -230,7 +230,7 @@ ui <- page_navbar(
              column(width = 3))),
   nav_panel(
     tagList(bs_icon("table"), "Master Table"),
-    DTOutput("master_table")
+    fluidRow(DTOutput("master_table"))
   )
   
 )
