@@ -1,3 +1,16 @@
+library(shiny)
+library(bslib)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(purrr)
+library(stringr)
+library(bsicons)
+library(DT)
+library(reactable)
+library(htmltools)
+library(htmlwidgets)
+
 ui <- page_navbar(
   title = "BotC Stats",
   theme = dark_theme,
@@ -150,7 +163,7 @@ ui <- page_navbar(
       column(width = 9,
              card(
                height = NULL,
-               card_header("Click on a expand icon next to each player to see their games"),
+               card_header("Stats by player. Click on a expand icon next to each player to see their games"),
                card_body(reactableOutput("totals_dt")))
       )
       ,
@@ -158,9 +171,14 @@ ui <- page_navbar(
   
   nav_panel(
     tagList(icon("flask", lib = "font-awesome"), "Trouble Brewing"),
-    fluidRow(
+    fluidRow(                    
+      card(height = NULL,
+      card_header("Stats for all our Trouble Brewing games")),
       column(width = 9,
-             card(uiOutput("tb_text"))),
+             fluidRow(column(width = 6,
+             card(height = 160,uiOutput("tb_text"))),
+             column(width = 6,
+             card(height = 160,uiOutput("tb_text_2"))))),
       column(width = 3)),
     fluidRow(
       column(width = 9,
@@ -170,8 +188,13 @@ ui <- page_navbar(
   nav_panel(
     tagList(bs_icon("flower1"), "Sects & Violets"),
     fluidRow(
+      card(height = NULL,
+           card_header("Stats for all our Sects & Violets games")),
       column(width = 9,
-             card(uiOutput("sv_text"))),
+             fluidRow(column(width = 6,
+                             card(height = 160,uiOutput("sv_text"))),
+                      column(width = 6,
+                             card(height = 160,uiOutput("sv_text_2"))))),
       column(width = 3)),
     fluidRow(
       column(width = 9,
@@ -179,22 +202,29 @@ ui <- page_navbar(
       column(width = 3))),
   nav_panel(
     tagList(bs_icon("cloud-moon-fill"), "Bad Moon Rising"),
-    fluidRow(column(width = 3,
-                    card(value_box(
-                      title = "Stats for BMR",
-                      value = paste0("No games yet!"),
-                      theme = value_box_theme(
-                        bg = "#C2504E",
-                        fg = "#0F1115"
-                      ), showcase = bs_icon("cloud-moon-fill"),
-                      showcase_layout = "left center", full_screen = FALSE, fill = TRUE,
-                      height = 100))))),
+    fluidRow(                    
+      card(height = NULL,
+           card_header("Stats for all our Bad Moon Rising games")),
+      column(width = 9,
+             fluidRow(column(width = 6,
+                             card(value_box(
+                               title = NULL,
+                               value = paste0("No games yet!"),
+                               theme = value_box_theme(
+                                 bg = "#C2504E",
+                                 fg = "#0F1115"
+                               ), showcase = bs_icon("cloud-moon-fill"),
+                               showcase_layout = "left center", full_screen = FALSE, fill = TRUE,
+                               height = 100))))),
+                      column(width = 6)),
+      column(width = 3)),
+          
   nav_panel(
     tagList(bs_icon("clipboard-data-fill"), "Game Size"),
     fluidRow(column(width = 9,
                     card(
                       height = NULL,
-                      card_header("Click on a expand icon next to each player to see their games"),
+                      card_header("Stats for the player count in each game"),
                       card_body(DTOutput("size_table"))))
              ,
              column(width = 3))),

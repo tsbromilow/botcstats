@@ -1,4 +1,5 @@
 library(shiny)
+library(sass)
 library(bslib)
 library(dplyr)
 library(tidyr)
@@ -11,8 +12,10 @@ library(reactable)
 library(htmltools)
 library(htmlwidgets)
 
-source("scripts/prescript.R")
-source("scripts/theme.R")
+source("theme.R")
+source("prescript.R")
+source("ui.R")
+source("server.R")
 
 # Run the application 
 shinyApp(ui = ui, server = server)

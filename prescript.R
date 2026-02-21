@@ -1,5 +1,18 @@
 #rm(list=ls())
 
+library(shiny)
+library(bslib)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(purrr)
+library(stringr)
+library(bsicons)
+library(DT)
+library(reactable)
+library(htmltools)
+library(htmlwidgets)
+
 ## Read in data ##
 data <- read.csv("master.csv")
 role_list <- read.csv("data/roles.csv")

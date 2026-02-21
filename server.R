@@ -1,3 +1,16 @@
+library(shiny)
+library(bslib)
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(purrr)
+library(stringr)
+library(bsicons)
+library(DT)
+library(reactable)
+library(htmltools)
+library(htmlwidgets)
+
 server <- function(input, output) {
   
   output$totals_dt <- renderReactable({
@@ -133,14 +146,11 @@ server <- function(input, output) {
   
   
   output$tb_text <- renderUI({
-    tf_roles <- tb_role_summary %>%
+    name_t <- tb_role_summary %>%
       filter(Character == "Townsfolk") %>%
       slice_max(order_by = Played, n = 1, with_ties = TRUE) %>%
-      pull(Role)
-    
-    name_t <- paste(tf_roles, collapse = " and the ")
-    verb_t <- if (length(tf_roles) > 1) "were" else "was"
-    
+      pull(Role) %>%
+      paste(collapse = " and the ")
     
     played_t <- tb_role_summary %>%
       filter(Character == "Townsfolk") %>% 
@@ -164,8 +174,6 @@ server <- function(input, output) {
       pull(Role)
     
     name_m <- paste(minion_roles, collapse = " and the ")
-    verb_m <- if (length(minion_roles) > 1) "were" else "was"
-    
     
     played_m <- tb_role_summary %>%
       filter(Character == "Minion") %>% 
@@ -178,27 +186,120 @@ server <- function(input, output) {
       pull(Role)
     
     
-    tags$span(
-      "The stats for all the times we've played Trouble Brewing are below. Out of the Townsfolk, the ",
-      tags$strong(name_t), " ", verb_t,
-      " included in the bag the most times. They were played ",
-      tags$strong(played_t),
-      " times. For Outsiders it was ",
-      tags$strong(name_o),
-      " at ",
-      tags$strong(played_o),
-      " times. Out of the minions, the ",
-      tags$strong(name_m), " ", verb_m,
-      " most common at ",
-      tags$strong(played_m),
-      " times. And the ",
-      tags$strong(name_d),
-      " was, of course, played in every game."
+    tags$div(
+      tags$span("Most played roles:"),
+      
+      tags$ul(
+        tags$li(
+          "Townsfolk: ",
+          tags$strong(name_t), paste0(" (",played_t),
+          " times)"
+        ),
+        tags$li(
+          "Outsider: ",
+          tags$strong(name_o), paste0(" (",played_o),
+          " times)"
+        ),
+        tags$li(
+          "Minion: ",
+          tags$strong(name_m), paste0(" (",played_m),
+          " times)"
+        ),
+        tags$li(
+          "Demon: ",
+          tags$strong(name_d),
+          " (every game)"
+        )
+      )
     )
     
     
   })
   
+  
+  output$tb_text_2 <- renderUI({
+    
+    name_t <- tb_role_summary %>%
+      filter(Character == "Townsfolk") %>%
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role) %>%
+      paste(collapse = " and the ")
+    
+    played_t <- tb_role_summary %>%
+      filter(Character == "Townsfolk") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    name_o <- tb_role_summary %>%
+      filter(Character == "Outsider") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role) %>%
+      paste(collapse = " and the ")
+    
+    played_o <- tb_role_summary %>%
+      filter(Character == "Outsider") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    minion_roles <- tb_role_summary %>%
+      filter(Character == "Minion") %>%
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role)
+    
+    name_m <- paste(minion_roles, collapse = " and the ")
+    
+    played_m <- tb_role_summary %>%
+      filter(Character == "Minion") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    name_d <- tb_role_summary %>%
+      filter(Character == "Demon") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role)
+    
+    played_d <- tb_role_summary %>%
+      filter(Character == "Demon") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    tags$div(
+      tags$span("Best win rates (5 or more games):"),
+      
+      tags$ul(
+        tags$li(
+          "Townsfolk: ",
+          tags$strong(name_t), paste0(" (",played_t*100,
+                                      "% win rate)")
+        ),
+        tags$li(
+          "Outsider: ",
+          tags$strong(name_o), paste0(" (",played_o*100,
+                                      "% win rate)"),
+        ),
+        tags$li(
+          "Minion: ",
+          tags$strong(name_m), paste0(" (",played_m*100,
+                                      "% win rate)"),
+        ),
+        tags$li(
+          "Demon: ",
+          tags$strong(name_d), paste0(" (",played_d*100,
+                                      "% win rate)")
+        )
+      )
+    )
+    
+    
+  })
   
   output$sv_text <- renderUI({
     
@@ -208,8 +309,6 @@ server <- function(input, output) {
       pull(Role)
     
     name_t <- paste(tf_roles, collapse = " and the ")
-    verb_t <- if (length(tf_roles) > 1) "were" else "was"
-    
     
     played_t <- sv_role_summary %>%
       filter(Character == "Townsfolk") %>% 
@@ -233,9 +332,7 @@ server <- function(input, output) {
       pull(Role)
     
     name_m <- paste(m_roles, collapse = " and the ")
-    verb_m <- if (length(m_roles) > 1) "were" else "was"
-    
-    
+
     played_m <- sv_role_summary %>%
       filter(Character == "Minion") %>% 
       slice_max(order_by = Played, n = 1, with_ties = FALSE) %>%
@@ -247,31 +344,123 @@ server <- function(input, output) {
       pull(Role)
     
     name_d <- paste(d_roles, collapse = " and the ")
-    verb_d <- if (length(d_roles) > 1) "were" else "was"
-    
+
     played_d <- sv_role_summary %>%
       filter(Character == "Demon") %>% 
       slice_max(order_by = Played, n = 1, with_ties = FALSE) %>%
       pull(Played)
     
-    tags$span(
-      "The stats for all the times we've played Sects & Violets are below. Out of the Townsfolk, the ",
-      tags$strong(name_t), " ", verb_t,
-      " included in the bag the most times. They were played ",
-      tags$strong(played_t),
-      " times. For Outsiders it was ",
-      tags$strong(name_o),
-      " at ",
-      tags$strong(played_o),
-      " times. Out of the minions, the ",
-      tags$strong(name_m), " ", verb_m,
-      " most common at ",
-      tags$strong(played_m),
-      " times. Looking at Demons, the ",
-      tags$strong(name_d), " ", verb_d,
-      " included ",
-      tags$strong(played_d),
-      " times."
+    tags$div(
+      tags$span("Most played roles:"),
+      
+      tags$ul(
+        tags$li(
+          "Townsfolk: ",
+          tags$strong(name_t), paste0(" (",played_t),
+          " times)"
+        ),
+        tags$li(
+          "Outsider: ",
+          tags$strong(name_o), paste0(" (",played_o),
+          " times)"
+        ),
+        tags$li(
+          "Minion: ",
+          tags$strong(name_m), paste0(" (",played_m),
+          " times)"
+        ),
+        tags$li(
+          "Demon: ",
+          tags$strong(name_d), paste0(" (",played_d),
+          " times)"
+        )
+      )
     )
   })
+  
+  output$sv_text_2 <- renderUI({
+    
+    name_t <- sv_role_summary %>%
+      filter(Character == "Townsfolk") %>%
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role) %>%
+      paste(collapse = " and the ")
+    
+    played_t <- sv_role_summary %>%
+      filter(Character == "Townsfolk") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    name_o <- sv_role_summary %>%
+      filter(Character == "Outsider") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role) %>%
+      paste(collapse = " and the ")
+    
+    played_o <- sv_role_summary %>%
+      filter(Character == "Outsider") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    minion_roles <- sv_role_summary %>%
+      filter(Character == "Minion") %>%
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role)
+    
+    name_m <- paste(minion_roles, collapse = " and the ")
+    
+    played_m <- sv_role_summary %>%
+      filter(Character == "Minion") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    name_d <- sv_role_summary %>%
+      filter(Character == "Demon") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
+      pull(Role)
+    
+    played_d <- sv_role_summary %>%
+      filter(Character == "Demon") %>% 
+      filter(Played > 4) %>%
+      slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
+      pull(`Win Rate`)
+    
+    # tags$div(
+    #   tags$span("Best win rates (5 or more games):"),
+    #   
+    #   tags$ul(
+    #     tags$li(
+    #       "Townsfolk: ",
+    #       tags$strong(name_t), paste0(" (",played_t*100,
+    #                                   "% win rate)")
+    #     ),
+    #     tags$li(
+    #       "Outsider: ",
+    #       tags$strong(name_o), paste0(" (",played_o*100,
+    #                                   "% win rate)"),
+    #     ),
+    #     tags$li(
+    #       "Minion: ",
+    #       tags$strong(name_m), paste0(" (",played_m*100,
+    #                                   "% win rate)"),
+    #     ),
+    #     tags$li(
+    #       "Demon: ",
+    #       tags$strong(name_d), paste0(" (",played_d*100,
+    #                                   "% win rate)"),
+    #     )
+    #   )
+    # )
+    
+     tags$div(
+       tags$span("Win rates to be calculated after 5 games"))
+  })
+  
 }
