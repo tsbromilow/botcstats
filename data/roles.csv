@@ -1,0 +1,78 @@
+Role,Character,Alignment
+Chef,Townsfolk,Good
+Empath,Townsfolk,Good
+Fortune Teller,Townsfolk,Good
+Investigator,Townsfolk,Good
+Librarian,Townsfolk,Good
+Mayor,Townsfolk,Good
+Monk,Townsfolk,Good
+Ravenkeeper,Townsfolk,Good
+Slayer,Townsfolk,Good
+Soldier,Townsfolk,Good
+Undertaker,Townsfolk,Good
+Virgin,Townsfolk,Good
+Washerwoman,Townsfolk,Good
+Butler,Outsider,Good
+Recluse,Outsider,Good
+Saint,Outsider,Good
+Drunk,Outsider,Good
+Drunk (Chef),Outsider,Good
+Drunk (Empath),Outsider,Good
+Drunk (Fortune Teller),Outsider,Good
+Drunk (Investigator),Outsider,Good
+Drunk (Librarian),Outsider,Good
+Drunk (Mayor),Outsider,Good
+Drunk (Monk),Outsider,Good
+Drunk (Ravenkeeper),Outsider,Good
+Drunk (Slayer),Outsider,Good
+Drunk (Soldier),Outsider,Good
+Drunk (Undertaker),Outsider,Good
+Drunk (Virgin),Outsider,Good
+Drunk (Washerwoman),Outsider,Good
+Baron,Minion,Evil
+Poisoner,Minion,Evil
+Scarlet Woman,Minion,Evil
+Spy,Minion,Evil
+Marionette,Minion,Evil
+Marionette (Chef),Minion,Evil
+Marionette (Empath),Minion,Evil
+Marionette (Fortune Teller),Minion,Evil
+Marionette (Investigator),Minion,Evil
+Marionette (Librarian),Minion,Evil
+Marionette (Mayor),Minion,Evil
+Marionette (Monk),Minion,Evil
+Marionette (Ravenkeeper),Minion,Evil
+Marionette (Slayer),Minion,Evil
+Marionette (Soldier),Minion,Evil
+Marionette (Undertaker),Minion,Evil
+Marionette (Virgin),Minion,Evil
+Marionette (Washerwoman),Minion,Evil
+Marionette (Butler),Minion,Evil
+Marionette (Recluse),Minion,Evil
+Marionette (Saint),Minion,Evil
+Imp,Demon,Evil
+Clockmaker,Townsfolk,Good
+Dreamer,Townsfolk,Good
+Snake Charmer,Townsfolk,Good
+Mathematician,Townsfolk,Good
+Flowergirl,Townsfolk,Good
+Town Crier,Townsfolk,Good
+Oracle,Townsfolk,Good
+Savant,Townsfolk,Good
+Seamstress,Townsfolk,Good
+Philosopher,Townsfolk,Good
+Artist,Townsfolk,Good
+Juggler,Townsfolk,Good
+Sage,Townsfolk,Good
+Klutz,Outsider,Good
+Mutant,Outsider,Good
+Sweetheart,Outsider,Good
+Barber,Outsider,Good
+Evil Twin,Minion,Evil
+Cerenovus,Minion,Evil
+Pit Hag,Minion,Evil
+Witch,Minion,Evil
+No Dashi,Demon,Evil
+Fang Gu,Demon,Evil
+Vigormortis,Demon,Evil
+Vortox,Demon,Evil
