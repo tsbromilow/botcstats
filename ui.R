@@ -20,7 +20,7 @@ ui <- page_navbar(
                     card(value_box(
                       title = "Total games",
                       value = paste0(total_games),
-                      shiny::markdown(paste0("Tom ST ",totals$`Games Played`[totals$Name=="Alex Daines"],", Alex ST ",totals$`Games Played`[totals$Name=="Tom Bromilow"])),
+                      shiny::markdown(paste0("Storyteller: Tom - ",totals$`Games Played`[totals$Name=="Alex Daines"],", Alex - ",totals$`Games Played`[totals$Name=="Tom Bromilow"])),
                       theme = value_box_theme(
                         bg = "#E6E6E6",
                         fg = "#0F1115"
@@ -54,7 +54,6 @@ ui <- page_navbar(
                     card(value_box(
                       title = "Total TB games",
                       value = paste0(tb_total_games),
-                      shiny::markdown(paste0("We are now pros")),
                       theme = value_box_theme(
                         bg = "#E6E6E6",
                         fg = "#0F1115"
@@ -88,7 +87,6 @@ ui <- page_navbar(
                     card(value_box(
                       title = "Total S&V games",
                       value = paste0(sv_total_games),
-                      shiny::markdown(paste0("Still very much learning")),
                       theme = value_box_theme(
                         bg = "#E6E6E6",
                         fg = "#0F1115"
@@ -123,7 +121,6 @@ ui <- page_navbar(
                     card(value_box(
                       title = "Total BMR games",
                       value = paste0(0),
-                      shiny::markdown(paste0("Hours of fun await")),
                       theme = value_box_theme(
                         bg = "#E6E6E6",
                         fg = "#0F1115"

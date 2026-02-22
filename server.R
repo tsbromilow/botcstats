@@ -303,17 +303,17 @@ server <- function(input, output) {
         tags$li(
           "Outsider: ",
           tags$strong(name_o), paste0(" (",played_o),
-          " times)"
+          " time)"
         ),
         tags$li(
           "Minion: ",
           tags$strong(name_m), paste0(" (",played_m),
-          " times)"
+          " time)"
         ),
         tags$li(
           "Demon: ",
           tags$strong(name_d), paste0(" (",played_d),
-          " times)"
+          " time)"
         )
       )
     )

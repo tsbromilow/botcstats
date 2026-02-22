@@ -171,7 +171,7 @@ best_good_rate <- totals %>% filter(`Games Played` > 4) %>%
 best_good_games <- totals %>% filter(`Games Played` > 4) %>% 
   arrange(desc(`Good Win %`)) %>%
   slice(1) %>%
-  pull(`Games Played`)
+  pull(`Good Games`)
 
 best_evil_name <- totals %>% filter(`Games Played` > 4) %>% 
   arrange(desc(`Evil Win %`)) %>%
@@ -186,7 +186,7 @@ best_evil_rate <- totals %>% filter(`Games Played` > 4) %>%
 best_evil_games <- totals %>% filter(`Games Played` > 4) %>% 
   arrange(desc(`Evil Win %`)) %>%
   slice(1) %>%
-  pull(`Games Played`)
+  pull(`Evil Games`)
 
 best_name <- totals %>% filter(`Games Played` > 4) %>% 
   arrange(desc(`Win %`)) %>%
