@@ -158,71 +158,71 @@ library(htmlwidgets)
           as.character(.x)))) %>% rev() %>% relocate(Name)
 
 ## Stats for value boxes ##
-  best_good_name <- totals %>% filter(`Games Played` > 4) %>% 
+  best_good_name <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Good Win %`)) %>%
     slice(1) %>%
     pull(Name)
   
-  best_good_rate <- totals %>% filter(`Games Played` > 4) %>% 
+  best_good_rate <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Good Win %`)) %>%
     slice(1) %>%
     pull(`Good Win %`)
   
-  best_good_games <- totals %>% filter(`Games Played` > 4) %>% 
+  best_good_games <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Good Win %`)) %>%
     slice(1) %>%
     pull(`Good Games`)
   
-  best_evil_name <- totals %>% filter(`Games Played` > 4) %>% 
+  best_evil_name <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Evil Win %`)) %>%
     slice(1) %>%
     pull(Name)
   
-  best_evil_rate <- totals %>% filter(`Games Played` > 4) %>% 
+  best_evil_rate <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Evil Win %`)) %>%
     slice(1) %>%
     pull(`Evil Win %`)
   
-  best_evil_games <- totals %>% filter(`Games Played` > 4) %>% 
+  best_evil_games <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Evil Win %`)) %>%
     slice(1) %>%
     pull(`Evil Games`)
   
-  best_name <- totals %>% filter(`Games Played` > 4) %>% 
+  best_name <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Win %`)) %>%
     slice(1) %>%
     pull(Name)
   
-  best_rate <- totals %>% filter(`Games Played` > 4) %>% 
+  best_rate <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Win %`)) %>%
     slice(1) %>%
     pull(`Win %`)
   
-  best_games <- totals %>% filter(`Games Played` > 4) %>% 
+  best_games <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(desc(`Win %`)) %>%
     slice(1) %>%
     pull(`Games Played`)
   
-  worst_name <- totals %>% filter(`Games Played` > 4) %>% 
+  worst_name <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(`Win %`) %>%
     slice(1) %>%
     pull(Name)
   
-  worst_rate <- totals %>% filter(`Games Played` > 4) %>% 
+  worst_rate <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(`Win %`) %>%
     slice(1) %>%
     pull(`Win %`)
   
-  worst_games <- totals %>% filter(`Games Played` > 4) %>% 
+  worst_games <- player_totals %>% filter(`Games Played` > 4) %>% 
     arrange(`Win %`) %>%
     slice(1) %>%
     pull(`Games Played`)
   
-  most_name <- totals %>% arrange(desc(`Games Played`)) %>%
+  most_name <- player_totals %>% arrange(desc(`Games Played`)) %>%
     slice(1) %>%
     pull(Name)
   
-  most_games <- totals %>% arrange(desc(`Games Played`)) %>%
+  most_games <- player_totals %>% arrange(desc(`Games Played`)) %>%
     slice(1) %>%
     pull(`Games Played`)
   
