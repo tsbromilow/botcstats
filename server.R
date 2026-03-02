@@ -13,9 +13,50 @@ library(htmlwidgets)
 
 server <- function(input, output) {
   
-  output$totals_dt <- renderReactable({totals_table})
+# Players table
+  output$totals_dt <- renderReactable({reactable(player_totals,
+                      columns = list(
+                      Name = colDef(align = "left", minWidth = 130),
+                      "Games Played" = colDef(align = "center", minWidth = 120),
+                      "Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),
+                      "Good Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),
+                      "Evil Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),
+                      "Good Games"   = colDef(align = "center", minWidth = 110),
+                      "Evil Games"    = colDef(align = "center"),
+                      Wins    = colDef(align = "center"),
+                      "Good Wins"     = colDef(align = "center"),
+                      "Evil Wins"     = colDef(align = "center")
+                      ),
+                      pagination = FALSE,
+                      searchable = FALSE,
+                      outlined = FALSE,
+                      striped = TRUE,
+                      highlight = TRUE,
+                      onClick = "select",
+                      rowStyle = JS("function(rowInfo) {
+                      if (rowInfo.expanded) {
+                      return { backgroundColor: '#C2504E', color: '#0F1115' };}}"),
+                      rowClass = JS("function(rowInfo) {
+                      return rowInfo.expanded ? 'is-expanded' : '';}"),
+                      details = function(index) {
+                      name_data <- inline[inline$Name == player_totals$Name[index], ]
+                      htmltools::div(reactable(
+                      name_data,
+                      outlined = FALSE,
+                      pagination = FALSE,
+                      searchable = FALSE,
+                      compact = TRUE,
+                      striped = TRUE,
+                      highlight = TRUE,
+                      columns = list(
+                       Name = colDef(show = FALSE),
+                       Game    = colDef(align = "left"),
+                       Role   = colDef(align = "center"),
+                       Alignment    = colDef(align = "center"),
+                       "Won?"     = colDef(align = "center"),
+                       Script     = colDef(align = "center"))))})})
   
-  
+# Game size table
   output$size_table <- renderDT({
     datatable(
       summary_by_size,
@@ -24,15 +65,12 @@ server <- function(input, output) {
         dom = 't',
         columnDefs = list(
           list(width = "10%", className = 'dt-left',   targets = 0),
-          list(width = "13%", className = 'dt-center', targets = 1:7)
-        )
-      ),
+          list(width = "13%", className = 'dt-center', targets = 1:7))),
       rownames = FALSE,
       fillContainer = FALSE) %>%
-      formatPercentage(columns = c(3,5,7), digits = 0)
-  })
+      formatPercentage(columns = c(3,5,7), digits = 0)})
   
-  
+# Trouble Brewing table
   output$tb_table <- renderDT({
     datatable(
       tb_role_summary,
@@ -42,14 +80,12 @@ server <- function(input, output) {
         columnDefs = list(
           list(width = "15%", className = 'dt-left',   targets = 0),
           list(width = "15%", className = 'dt-center', targets = 1),
-          list(width = "14%", className = 'dt-center', targets = 2:6)
-        )
-      ),
+          list(width = "14%", className = 'dt-center', targets = 2:6))),
       rownames = FALSE,
       fillContainer = FALSE) %>%
-      formatPercentage(columns = c(4, 7), digits = 0)
-  })
+      formatPercentage(columns = c(4, 7), digits = 0)})
   
+# Sects and Violets table
   output$sv_table <- renderDT({
     datatable(
       sv_role_summary,
@@ -59,14 +95,12 @@ server <- function(input, output) {
         columnDefs = list(
           list(width = "15%", className = 'dt-left',   targets = 0),
           list(width = "15%", className = 'dt-center', targets = 1),
-          list(width = "14%", className = 'dt-center', targets = 2:6)
-        )
-      ),
+          list(width = "14%", className = 'dt-center', targets = 2:6))),
       rownames = FALSE,
       fillContainer = FALSE) %>%
-      formatPercentage(columns = c(4, 7), digits = 0)
-  })
+      formatPercentage(columns = c(4, 7), digits = 0)})
   
+# Master table
   output$master_table <- renderDT({
     datatable(
       master,
@@ -75,17 +109,14 @@ server <- function(input, output) {
         dom = 't',
         columnDefs = list(
           list(width = "10%", className = 'dt-left',   targets = 0),
-          list(width = "4%", className = 'dt-center', targets = 1:22)
-        )
-      ),
+          list(width = "4%", className = 'dt-center', targets = 1:22))),
       rownames = FALSE,
-      fillContainer = FALSE)
-  })
-  
-  #output$totalgamesbox  <- renderText({paste0(total_games)})
+      fillContainer = FALSE)})
+
+# Bad Moon Rising box
   output$bmrbox  <- renderText({paste0("No games yet!")})
   
-  
+# Trouble Brewing text
   output$tb_text <- renderUI({
     name_t <- tb_role_summary %>%
       filter(Character == "Townsfolk") %>%
@@ -152,11 +183,7 @@ server <- function(input, output) {
           " (every game)"
         )
       )
-    )
-    
-    
-  })
-  
+    )})
   
   output$tb_text_2 <- renderUI({
     
@@ -237,11 +264,9 @@ server <- function(input, output) {
                                       "% win rate)")
         )
       )
-    )
-    
-    
-  })
+    )})
   
+# Sects and Violets text
   output$sv_text <- renderUI({
     
     tf_roles <- sv_role_summary %>%

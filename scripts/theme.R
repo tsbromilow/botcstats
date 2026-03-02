@@ -2,10 +2,10 @@
       version = 5,
       "bslib_spacer" = "0rem",
       # Core palette
-      bg       = "#0F1115",  # near-black 
-      fg       = "#E6E6E6",  # soft light grey for text
-      primary  = "#C2504E",  # vivid red accent
-      secondary= "#828995",  # cool grey for subtle accents
+      bg       = "#0F1115", 
+      fg       = "#E6E6E6",  
+      primary  = "#C2504E", 
+      secondary= "#828995",
       # Surfaces & borders
       "body-bg"             = "#0F1115",
       "body-color"          = "#E6E6E6",
@@ -13,11 +13,8 @@
       "card-border-color"   = "#2A2F3A",
       "border-color"        = "#2A2F3A",
       # Links & states
-      "link-color"          = "#C2504E",   # lighter red for links
+      "link-color"          = "#C2504E",
       "link-hover-color"    = "#FF817C",
-      "success"             = "#28A745",
-      "warning"             = "#E0A800",
-      "danger"              = "#C2504E",
       # Inputs
       "input-bg"            = "#12151B",
       "input-border-color"  = "#343A46",
@@ -29,8 +26,7 @@
       "navbar-dark-active-color" = "#FFFFFF",
       "navbar-dark-brand-color"  = "#FFFFFF",
       "navbar-dark-brand-hover-color" = "#FFFFFF"
-    ) |>
-      # Extra polish with CSS rules
+    ) %>% 
       bs_add_rules("
         :root {
           --panel-bg: #0F1115;
@@ -40,9 +36,6 @@
           --accent-2: #FF6B66;
         }
         
-        
-
-
         /* Buttons */
         .btn-primary {
           background-color: var(--accent);
@@ -362,7 +355,7 @@
   }
   
   /* Striping + hover for nested/details table */
-  #totals_dt .reactable .rt-tbody .rt-tr-group:nth-of-type(odd) .rt-td {
+  #totals_dt .reactable .rt-tbody .rt-tr-group:nth-of-type(even) .rt-td {
     background-color: #0F1115 !important;
   }
   #totals_dt .reactable .rt-tbody .rt-tr:hover .rt-td {
