@@ -20,7 +20,7 @@ ui <- page_navbar(
                     card(value_box(
                       title = "Total games",
                       value = paste0(total_games),
-                      shiny::markdown(paste0("Storyteller: Tom - ",totals$`Games Played`[totals$Name=="Alex Daines"],", Alex - ",totals$`Games Played`[totals$Name=="Tom Bromilow"])),
+                      shiny::markdown(paste0("ST: Tom - ",player_totals$`Games Played`[player_totals$Name=="Alex Daines"],", Alex - ",player_totals$`Games Played`[player_totals$Name=="Tom Bromilow"])),
                       theme = value_box_theme(
                         bg = "#E6E6E6",
                         fg = "#0F1115"

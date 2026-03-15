@@ -348,33 +348,33 @@ server <- function(input, output) {
     
     name_t <- sv_role_summary %>%
       filter(Character == "Townsfolk") %>%
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
       pull(Role) %>%
       paste(collapse = " and the ")
     
     played_t <- sv_role_summary %>%
       filter(Character == "Townsfolk") %>% 
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
       pull(`Win Rate`)
     
     name_o <- sv_role_summary %>%
       filter(Character == "Outsider") %>% 
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
       pull(Role) %>%
       paste(collapse = " and the ")
     
     played_o <- sv_role_summary %>%
       filter(Character == "Outsider") %>% 
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
       pull(`Win Rate`)
     
     minion_roles <- sv_role_summary %>%
       filter(Character == "Minion") %>%
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
       pull(Role)
     
@@ -382,51 +382,49 @@ server <- function(input, output) {
     
     played_m <- sv_role_summary %>%
       filter(Character == "Minion") %>% 
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
       pull(`Win Rate`)
     
     name_d <- sv_role_summary %>%
       filter(Character == "Demon") %>% 
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = TRUE) %>%
       pull(Role)
     
     played_d <- sv_role_summary %>%
       filter(Character == "Demon") %>% 
-      filter(Played > 4) %>%
+      filter(Played > 2) %>%
       slice_max(order_by = `Win Rate`, n = 1, with_ties = FALSE) %>%
       pull(`Win Rate`)
     
-    # tags$div(
-    #   tags$span("Best win rates (5 or more games):"),
-    #   
-    #   tags$ul(
-    #     tags$li(
-    #       "Townsfolk: ",
-    #       tags$strong(name_t), paste0(" (",played_t*100,
-    #                                   "% win rate)")
-    #     ),
-    #     tags$li(
-    #       "Outsider: ",
-    #       tags$strong(name_o), paste0(" (",played_o*100,
-    #                                   "% win rate)"),
-    #     ),
-    #     tags$li(
-    #       "Minion: ",
-    #       tags$strong(name_m), paste0(" (",played_m*100,
-    #                                   "% win rate)"),
-    #     ),
-    #     tags$li(
-    #       "Demon: ",
-    #       tags$strong(name_d), paste0(" (",played_d*100,
-    #                                   "% win rate)"),
-    #     )
-    #   )
-    # )
+    tags$div(
+      tags$span("Best win rates (3 or more games):"),
+
+      tags$ul(
+        tags$li(
+          "Townsfolk: ",
+          tags$strong(name_t), paste0(" (",played_t*100,
+                                      "% win rate)")
+        ),
+        tags$li(
+          "Outsider: ",
+          tags$strong(name_o), paste0(" (",played_o*100,
+                                      "% win rate)"),
+        ),
+        tags$li(
+          "Minion: ",
+          tags$strong(name_m), paste0(" (",played_m*100,
+                                      "% win rate)"),
+        ),
+        tags$li(
+          "Demon: ",
+          tags$strong(name_d), paste0(" (",played_d*100,
+                                      "% win rate)"),
+        )
+      )
+    )
     
-     tags$div(
-       tags$span("Win rates to be calculated after 5 games"))
   })
   
 }
