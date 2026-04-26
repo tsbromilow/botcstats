@@ -62,6 +62,29 @@ library(htmlwidgets)
           Game)),
       .groups = "drop") %>%
     deframe()
+  
+  summary_for_roles <- data %>%
+    slice(-n(),(-(n()-1))) %>%
+    pivot_longer(-Name, names_to = "Game", values_to = "Role") %>%
+    filter(!is.na(Role), Role != "") %>% 
+    mutate(Alignment = ifelse(str_sub(Role, 1, 1) == "e", "Evil", "Good"),
+           Role = str_sub(Role, 2)) %>%
+    mutate(Role = if_else(str_detect(Role, "Snake Charmer\\s>"),str_remove(Role, "^.*>\\s"),
+            if_else(str_detect(Role, ">\\sSnake Charmer"),str_remove(Role, "^.*>\\s"),Role))) %>% 
+    mutate(Role = if_else(str_detect(Role, "\\s>"),
+                          str_remove(Role, "\\s>.*$"),              
+                          Role)) %>%  
+    left_join(wins, by = "Game") %>% 
+    left_join(script, by = "Game") %>% 
+    group_by(Name) %>%
+    summarise(
+      Game = list(
+        setNames(
+          lapply(seq_along(Role), function(i) list(Role = Role[i], Script = Script[i], Alignment = Alignment[i], Win = ifelse(Alignment[i] == TeamWin[i],"Yes","No"))),
+          Game)),
+      .groups = "drop") %>%
+    deframe()  
+  
 
 ## Generate a table with win percentages and then the inline table to be nested ##
   player_totals <- enframe(summary, name = "Name", value = "Games") %>%
@@ -94,7 +117,7 @@ library(htmlwidgets)
 
 ## Generate a table with all roles and stats by script ##
   func_role_summary<- function(arg_script){
-    output <- enframe(summary, name = "Name", value = "Games") %>%
+    output <- enframe(summary_for_roles, name = "Name", value = "Games") %>%
     mutate(rows = map2(Name, Games,
                        ~ map_dfr(.y, \(g) tibble(
                          Name      = .x,
