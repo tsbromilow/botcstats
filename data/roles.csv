@@ -1,78 +1,103 @@
-Role,Character,Alignment
-Chef,Townsfolk,Good
-Empath,Townsfolk,Good
-Fortune Teller,Townsfolk,Good
-Investigator,Townsfolk,Good
-Librarian,Townsfolk,Good
-Mayor,Townsfolk,Good
-Monk,Townsfolk,Good
-Ravenkeeper,Townsfolk,Good
-Slayer,Townsfolk,Good
-Soldier,Townsfolk,Good
-Undertaker,Townsfolk,Good
-Virgin,Townsfolk,Good
-Washerwoman,Townsfolk,Good
-Butler,Outsider,Good
-Recluse,Outsider,Good
-Saint,Outsider,Good
-Drunk,Outsider,Good
-Drunk (Chef),Outsider,Good
-Drunk (Empath),Outsider,Good
-Drunk (Fortune Teller),Outsider,Good
-Drunk (Investigator),Outsider,Good
-Drunk (Librarian),Outsider,Good
-Drunk (Mayor),Outsider,Good
-Drunk (Monk),Outsider,Good
-Drunk (Ravenkeeper),Outsider,Good
-Drunk (Slayer),Outsider,Good
-Drunk (Soldier),Outsider,Good
-Drunk (Undertaker),Outsider,Good
-Drunk (Virgin),Outsider,Good
-Drunk (Washerwoman),Outsider,Good
-Baron,Minion,Evil
-Poisoner,Minion,Evil
-Scarlet Woman,Minion,Evil
-Spy,Minion,Evil
-Marionette,Minion,Evil
-Marionette (Chef),Minion,Evil
-Marionette (Empath),Minion,Evil
-Marionette (Fortune Teller),Minion,Evil
-Marionette (Investigator),Minion,Evil
-Marionette (Librarian),Minion,Evil
-Marionette (Mayor),Minion,Evil
-Marionette (Monk),Minion,Evil
-Marionette (Ravenkeeper),Minion,Evil
-Marionette (Slayer),Minion,Evil
-Marionette (Soldier),Minion,Evil
-Marionette (Undertaker),Minion,Evil
-Marionette (Virgin),Minion,Evil
-Marionette (Washerwoman),Minion,Evil
-Marionette (Butler),Minion,Evil
-Marionette (Recluse),Minion,Evil
-Marionette (Saint),Minion,Evil
-Imp,Demon,Evil
-Clockmaker,Townsfolk,Good
-Dreamer,Townsfolk,Good
-Snake Charmer,Townsfolk,Good
-Mathematician,Townsfolk,Good
-Flowergirl,Townsfolk,Good
-Town Crier,Townsfolk,Good
-Oracle,Townsfolk,Good
-Savant,Townsfolk,Good
-Seamstress,Townsfolk,Good
-Philosopher,Townsfolk,Good
-Artist,Townsfolk,Good
-Juggler,Townsfolk,Good
-Sage,Townsfolk,Good
-Klutz,Outsider,Good
-Mutant,Outsider,Good
-Sweetheart,Outsider,Good
-Barber,Outsider,Good
-Evil Twin,Minion,Evil
-Cerenovus,Minion,Evil
-Pit Hag,Minion,Evil
-Witch,Minion,Evil
-No Dashi,Demon,Evil
-Fang Gu,Demon,Evil
-Vigormortis,Demon,Evil
-Vortox,Demon,Evil
+Role,Character,Alignment,Script
+Chef,Townsfolk,Good,Trouble Brewing
+Empath,Townsfolk,Good,Trouble Brewing
+Fortune Teller,Townsfolk,Good,Trouble Brewing
+Investigator,Townsfolk,Good,Trouble Brewing
+Librarian,Townsfolk,Good,Trouble Brewing
+Mayor,Townsfolk,Good,Trouble Brewing
+Monk,Townsfolk,Good,Trouble Brewing
+Ravenkeeper,Townsfolk,Good,Trouble Brewing
+Slayer,Townsfolk,Good,Trouble Brewing
+Soldier,Townsfolk,Good,Trouble Brewing
+Undertaker,Townsfolk,Good,Trouble Brewing
+Virgin,Townsfolk,Good,Trouble Brewing
+Washerwoman,Townsfolk,Good,Trouble Brewing
+Butler,Outsider,Good,Trouble Brewing
+Recluse,Outsider,Good,Trouble Brewing
+Saint,Outsider,Good,Trouble Brewing
+Drunk,Outsider,Good,Trouble Brewing
+Drunk (Chef),Outsider,Good,Trouble Brewing
+Drunk (Empath),Outsider,Good,Trouble Brewing
+Drunk (Fortune Teller),Outsider,Good,Trouble Brewing
+Drunk (Investigator),Outsider,Good,Trouble Brewing
+Drunk (Librarian),Outsider,Good,Trouble Brewing
+Drunk (Mayor),Outsider,Good,Trouble Brewing
+Drunk (Monk),Outsider,Good,Trouble Brewing
+Drunk (Ravenkeeper),Outsider,Good,Trouble Brewing
+Drunk (Slayer),Outsider,Good,Trouble Brewing
+Drunk (Soldier),Outsider,Good,Trouble Brewing
+Drunk (Undertaker),Outsider,Good,Trouble Brewing
+Drunk (Virgin),Outsider,Good,Trouble Brewing
+Drunk (Washerwoman),Outsider,Good,Trouble Brewing
+Baron,Minion,Evil,Trouble Brewing
+Poisoner,Minion,Evil,Trouble Brewing
+Scarlet Woman,Minion,Evil,Trouble Brewing
+Spy,Minion,Evil,Trouble Brewing
+Marionette,Minion,Evil,Trouble Brewing
+Marionette (Chef),Minion,Evil,Trouble Brewing
+Marionette (Empath),Minion,Evil,Trouble Brewing
+Marionette (Fortune Teller),Minion,Evil,Trouble Brewing
+Marionette (Investigator),Minion,Evil,Trouble Brewing
+Marionette (Librarian),Minion,Evil,Trouble Brewing
+Marionette (Mayor),Minion,Evil,Trouble Brewing
+Marionette (Monk),Minion,Evil,Trouble Brewing
+Marionette (Ravenkeeper),Minion,Evil,Trouble Brewing
+Marionette (Slayer),Minion,Evil,Trouble Brewing
+Marionette (Soldier),Minion,Evil,Trouble Brewing
+Marionette (Undertaker),Minion,Evil,Trouble Brewing
+Marionette (Virgin),Minion,Evil,Trouble Brewing
+Marionette (Washerwoman),Minion,Evil,Trouble Brewing
+Marionette (Butler),Minion,Evil,Trouble Brewing
+Marionette (Recluse),Minion,Evil,Trouble Brewing
+Marionette (Saint),Minion,Evil,Trouble Brewing
+Imp,Demon,Evil,Trouble Brewing
+Clockmaker,Townsfolk,Good,Sects & Violets
+Dreamer,Townsfolk,Good,Sects & Violets
+Snake Charmer,Townsfolk,Good,Sects & Violets
+Mathematician,Townsfolk,Good,Sects & Violets
+Flowergirl,Townsfolk,Good,Sects & Violets
+Town Crier,Townsfolk,Good,Sects & Violets
+Oracle,Townsfolk,Good,Sects & Violets
+Savant,Townsfolk,Good,Sects & Violets
+Seamstress,Townsfolk,Good,Sects & Violets
+Philosopher,Townsfolk,Good,Sects & Violets
+Artist,Townsfolk,Good,Sects & Violets
+Juggler,Townsfolk,Good,Sects & Violets
+Sage,Townsfolk,Good,Sects & Violets
+Klutz,Outsider,Good,Sects & Violets
+Mutant,Outsider,Good,Sects & Violets
+Sweetheart,Outsider,Good,Sects & Violets
+Barber,Outsider,Good,Sects & Violets
+Evil Twin,Minion,Evil,Sects & Violets
+Cerenovus,Minion,Evil,Sects & Violets
+Pit Hag,Minion,Evil,Sects & Violets
+Witch,Minion,Evil,Sects & Violets
+No Dashi,Demon,Evil,Sects & Violets
+Fang Gu,Demon,Evil,Sects & Violets
+Vigormortis,Demon,Evil,Sects & Violets
+Vortox,Demon,Evil,Sects & Violets
+Grandmother,Townsfolk,Good,Bad Moon Rising
+Sailor,Townsfolk,Good,Bad Moon Rising
+Chambermaid,Townsfolk,Good,Bad Moon Rising
+Exorcist,Townsfolk,Good,Bad Moon Rising
+Innkeeper,Townsfolk,Good,Bad Moon Rising
+Gambler,Townsfolk,Good,Bad Moon Rising
+Gossip,Townsfolk,Good,Bad Moon Rising
+Courtier,Townsfolk,Good,Bad Moon Rising
+Professor,Townsfolk,Good,Bad Moon Rising
+Minstrel,Townsfolk,Good,Bad Moon Rising
+Tea Lady,Townsfolk,Good,Bad Moon Rising
+Pacifist,Townsfolk,Good,Bad Moon Rising
+Fool,Townsfolk,Good,Bad Moon Rising
+Tinker,Outsider,Good,Bad Moon Rising
+Moonchild,Outsider,Good,Bad Moon Rising
+Goon,Outsider,Good,Bad Moon Rising
+Lunatic,Outsider,Good,Bad Moon Rising
+Godfather,Minion,Evil,Bad Moon Rising
+Devils Advocate,Minion,Evil,Bad Moon Rising
+Assassin,Minion,Evil,Bad Moon Rising
+Mastermind,Minion,Evil,Bad Moon Rising
+Zombuul,Demon,Evil,Bad Moon Rising
+Pukka,Demon,Evil,Bad Moon Rising
+Shabaloth,Demon,Evil,Bad Moon Rising
+Po,Demon,Evil,Bad Moon Rising

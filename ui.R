@@ -120,7 +120,7 @@ ui <- page_navbar(
     fluidRow(column(width = 3,
                     card(value_box(
                       title = "Total BMR games",
-                      value = paste0(0),
+                      value = paste0(bmr_total_games),
                       theme = value_box_theme(
                         bg = "#E6E6E6",
                         fg = "#0F1115"
@@ -195,26 +195,18 @@ ui <- page_navbar(
       column(width = 3)),
     fluidRow(
       column(width = 9,
-             card(height = NULL,DTOutput("sv_table"))),
+             card(height = 620,DTOutput("sv_table"))),
       column(width = 3))),
   nav_panel(
     tagList(bs_icon("cloud-moon-fill"), "Bad Moon Rising"),
     fluidRow(                    
       card(height = NULL,
-           card_header("Stats for all our Bad Moon Rising games")),
+           card_header("Stats for all our Bad Moon Rising games"))), # extra bracket here
+
+    fluidRow(
       column(width = 9,
-             fluidRow(column(width = 6,
-                             card(value_box(
-                               title = NULL,
-                               value = paste0("No games yet!"),
-                               theme = value_box_theme(
-                                 bg = "#C2504E",
-                                 fg = "#0F1115"
-                               ), showcase = bs_icon("cloud-moon-fill"),
-                               showcase_layout = "left center", full_screen = FALSE, fill = TRUE,
-                               height = 100))))),
-                      column(width = 6)),
-      column(width = 3)),
+             card(height = 620,DTOutput("bmr_table"))),
+      column(width = 3))),
           
   nav_panel(
     tagList(bs_icon("clipboard-data-fill"), "Game Size"),

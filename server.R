@@ -99,6 +99,21 @@ server <- function(input, output) {
       rownames = FALSE,
       fillContainer = FALSE) %>%
       formatPercentage(columns = c(4, 7), digits = 0)})
+
+# Bad Moon Rising table
+  output$bmr_table <- renderDT({
+    datatable(
+      bmr_role_summary,
+      options = list(
+        paging = FALSE,
+        dom = 't',
+        columnDefs = list(
+          list(width = "15%", className = 'dt-left',   targets = 0),
+          list(width = "15%", className = 'dt-center', targets = 1),
+          list(width = "14%", className = 'dt-center', targets = 2:6))),
+      rownames = FALSE,
+      fillContainer = FALSE) %>%
+      formatPercentage(columns = c(4, 7), digits = 0)})
   
 # Master table
   output$master_table <- renderDT({
@@ -328,17 +343,17 @@ server <- function(input, output) {
         tags$li(
           "Outsider: ",
           tags$strong(name_o), paste0(" (",played_o),
-          " time)"
+          " times)"
         ),
         tags$li(
           "Minion: ",
           tags$strong(name_m), paste0(" (",played_m),
-          " time)"
+          " times)"
         ),
         tags$li(
           "Demon: ",
           tags$strong(name_d), paste0(" (",played_d),
-          " time)"
+          " times)"
         )
       )
     )
