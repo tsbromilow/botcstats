@@ -16,7 +16,7 @@ server <- function(input, output) {
 # Players table
   output$totals_dt <- renderReactable({reactable(player_totals,
                       columns = list(
-                      Name = colDef(align = "left", minWidth = 130),
+                      Name = colDef(align = "left", minWidth = 150),
                       "Games Played" = colDef(align = "center", minWidth = 120),
                       "Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),
                       "Good Win %" = colDef(align = "center", format = colFormat(percent = TRUE)),

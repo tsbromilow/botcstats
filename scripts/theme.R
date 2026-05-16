@@ -427,8 +427,9 @@
 
 
     .value-box-value {
-      font-size: 1.5rem !important;    /* adjust as needed */
+      font-size: 1.1rem !important;    /* adjust as needed */
       line-height: 1.0;
+      font-weight: bold !important;
     }
 
   
