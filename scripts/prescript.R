@@ -188,32 +188,32 @@ library(htmlwidgets)
           as.character(.x)))) %>% rev() %>% relocate(Name)
 
 ## Stats for value boxes ##
-  best_good_name <- player_totals %>% filter(`Games Played` > 4) %>% 
+  best_good_name <- player_totals %>% filter(`Good Games` > 4) %>% 
     arrange(desc(`Good Win %`)) %>%
     slice(1) %>%
     pull(Name)
   
-  best_good_rate <- player_totals %>% filter(`Games Played` > 4) %>% 
+  best_good_rate <- player_totals %>% filter(`Good Games` > 4) %>% 
     arrange(desc(`Good Win %`)) %>%
     slice(1) %>%
     pull(`Good Win %`)
   
-  best_good_games <- player_totals %>% filter(`Games Played` > 4) %>% 
+  best_good_games <- player_totals %>% filter(`Good Games` > 4) %>% 
     arrange(desc(`Good Win %`)) %>%
     slice(1) %>%
     pull(`Good Games`)
   
-  best_evil_name <- player_totals %>% filter(`Games Played` > 4) %>% 
+  best_evil_name <- player_totals %>% filter(`Evil Games` > 4) %>% 
     arrange(desc(`Evil Win %`)) %>%
     slice(1) %>%
     pull(Name)
   
-  best_evil_rate <- player_totals %>% filter(`Games Played` > 4) %>% 
+  best_evil_rate <- player_totals %>% filter(`Evil Games` > 4) %>% 
     arrange(desc(`Evil Win %`)) %>%
     slice(1) %>%
     pull(`Evil Win %`)
   
-  best_evil_games <- player_totals %>% filter(`Games Played` > 4) %>% 
+  best_evil_games <- player_totals %>% filter(`Evil Games` > 4) %>% 
     arrange(desc(`Evil Win %`)) %>%
     slice(1) %>%
     pull(`Evil Games`)
