@@ -197,15 +197,35 @@ ui <- page_navbar(
       column(width = 9,
              card(height = 620,DTOutput("sv_table"))),
       column(width = 3))),
+  
   nav_panel(
     tagList(bs_icon("cloud-moon-fill"), "Bad Moon Rising"),
     fluidRow(                    
       card(height = NULL,
-           card_header("Stats for all our Bad Moon Rising games"))), # extra bracket here
-
+           card_header("Stats for all our Bad Moon Rising games")),
+      column(width = 9,
+             fluidRow(column(width = 6,
+                             card(height = 160,uiOutput("bmr_text"))),
+                      column(width = 6,
+                             card(height = 160,uiOutput("bmr_text_2"))))),
+      column(width = 3)),
     fluidRow(
       column(width = 9,
              card(height = 620,DTOutput("bmr_table"))),
+      column(width = 3))),
+          
+  nav_panel(
+    tagList(bs_icon("basket-fill"), "Custom Scripts"),
+    fluidRow(                    
+      card(height = NULL,
+           card_header("Stats for all our custom script games")),
+    column(width = 9,
+           fluidRow(card(height = 120,uiOutput("custom_scripts_text")))),
+
+    column(width = 3)),
+    fluidRow(
+      column(width = 9,
+             card(height = 620,DTOutput("custom_table"))),
       column(width = 3))),
           
   nav_panel(
@@ -217,6 +237,8 @@ ui <- page_navbar(
                       card_body(DTOutput("size_table"))))
              ,
              column(width = 3))),
+  
+  
   nav_panel(
     tagList(bs_icon("table"), "Master Table"),
     fluidRow(DTOutput("master_table"))

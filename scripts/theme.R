@@ -202,7 +202,36 @@
         line-height: 1.1;
         white-space: nowrap;
       }
+ 
+  /* Base font size + line height */
+      #custom_table table.dataTable,
+      #custom_table .dataTables_scrollHead table.dataTable,
+      #custom_table .dataTables_scrollBody table.dataTable {
+        font-size: 0.875rem;   /* ~14px; tweak as you like */
+        line-height: 1.15;
+      }
   
+      /* Body cells: tighter vertical + horizontal padding */
+      #custom_table table.dataTable tbody td,
+      #custom_table .dataTables_scrollBody table.dataTable tbody td {
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        white-space: nowrap;  /* keep rows short; remove if you want wrapping */
+      }
+  
+      /* Header cells: reduce padding and avoid wrap */
+      #custom_table table.dataTable thead th,
+      #custom_table .dataTables_scrollHead table.dataTable thead th {
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+        font-size: 0.9rem;  /* optional: a touch larger than body */
+        line-height: 1.1;
+        white-space: nowrap;
+      } 
   
   /* Base font size + line height */
       #master_table table.dataTable,

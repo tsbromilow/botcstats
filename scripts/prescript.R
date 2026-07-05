@@ -34,13 +34,21 @@ library(htmlwidgets)
   tb_total_games <- script %>% filter(Script == "Trouble Brewing") %>%  nrow()
   sv_total_games <- script %>% filter(Script == "Sects & Violets") %>%  nrow()
   bmr_total_games <- script %>% filter(Script == "Bad Moon Rising") %>%  nrow()
+  custom_total_games <- script %>% filter(Script != "Trouble Brewing",
+                                          Script != "Sects & Violets",
+                                          Script != "Bad Moon Rising") %>%  nrow()
+  
+  custom_game_scripts <- script %>% filter(Script != "Trouble Brewing",
+                                           Script != "Sects & Violets",
+                                           Script != "Bad Moon Rising") %>% group_by(Script) %>%  tally()
+  
   good_win_percent <- nrow(wins %>% filter(TeamWin == "Good"))/total_games
   evil_win_percent <- nrow(wins %>% filter(TeamWin == "Evil"))/total_games
 
   tb <- role_list %>% filter(Script == "Trouble Brewing") %>% pull(Role)
   sv <- role_list %>% filter(Script == "Sects & Violets") %>% pull(Role)
   bmr <- role_list %>% filter(Script == "Bad Moon Rising") %>% pull(Role)
-  
+  custom <- role_list %>% pull(Role)
 
 ## Generate a list with all players and their game history ##
   summary <- data %>%
@@ -76,6 +84,7 @@ library(htmlwidgets)
                           Role)) %>%  
     left_join(wins, by = "Game") %>% 
     left_join(script, by = "Game") %>% 
+    mutate(Script = ifelse(Script=="Trouble Brewing"|Script=="Bad Moon Rising"|Script=="Sects & Violets",Script,"Custom")) %>% 
     group_by(Name) %>%
     summarise(
       Game = list(
@@ -135,19 +144,23 @@ library(htmlwidgets)
     summarise(
       Played = sum(Games),
       Inclusion = round(Played/ifelse(arg_script=="Trouble Brewing", tb_total_games, 
-                                      ifelse(arg_script== "Sects & Violets", sv_total_games, bmr_total_games)),2),
+                                      ifelse(arg_script== "Sects & Violets", sv_total_games, 
+                                      ifelse(arg_script== "Bad Moon Rising", bmr_total_games,
+                                             custom_total_games))),2),
       Wins        = sum(Games[Win == "Yes"]),
       Losses      = sum(Games[Win == "No"]),
       "Win Rate"     = round(Wins / Played,2),
       .groups = "drop")  %>%
       left_join(role_list %>% select("Role","Character"), by = "Role") %>% 
       relocate("Character", .before = "Played")%>% 
-      slice(match({ if (isTRUE(arg_script == "Trouble Brewing")) tb else if (isTRUE(arg_script == "Sects & Violets")) sv else bmr}, .data$Role))
+      slice(match({ if (isTRUE(arg_script == "Trouble Brewing")) tb else if (isTRUE(arg_script == "Sects & Violets")) sv else if (isTRUE(arg_script == "Bad Moon Rising")) bmr else custom}, .data$Role))
       }
 
   tb_role_summary <- func_role_summary("Trouble Brewing")
   sv_role_summary <- func_role_summary("Sects & Violets")
   bmr_role_summary <- func_role_summary("Bad Moon Rising")
+  custom_role_summary <- func_role_summary("Custom")
+  
 
 ## Generate a table for game size stats ##
   sizes <- data %>%
