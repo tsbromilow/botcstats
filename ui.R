@@ -238,6 +238,44 @@ ui <- page_navbar(
              ,
              column(width = 3))),
   
+  nav_panel(
+    tagList(bs_icon("graph-up"), "Win Rate Over Time"),
+    fluidRow(
+      column(width = 9,
+             div(class = "wr-controls",
+                 card(
+                   card_header("Compare cumulative win rate for up to four players"),
+                   card_body(
+                     fluidRow(
+                       column(width = 3,
+                              selectInput("wr_p1", "Player 1",
+                                          choices  = c("None selected", sort(names(summary))),
+                                          selected = "None selected")),
+                       column(width = 3,
+                              selectInput("wr_p2", "Player 2",
+                                          choices  = c("None selected", sort(names(summary))),
+                                          selected = "None selected")),
+                       column(width = 3,
+                              selectInput("wr_p3", "Player 3",
+                                          choices  = c("None selected", sort(names(summary))),
+                                          selected = "None selected")),
+                       column(width = 3,
+                              selectInput("wr_p4", "Player 4",
+                                          choices  = c("None selected", sort(names(summary))),
+                                          selected = "None selected"))
+                     )
+                   )
+                 )
+             )),
+      column(width = 3)
+    ),
+    fluidRow(
+      column(width = 9,
+             card(height = 620,
+                  card_body(plotOutput("winrate_plot", height = "100%")))),
+      column(width = 3)
+    )
+  ),
   
   nav_panel(
     tagList(bs_icon("table"), "Master Table"),

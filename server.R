@@ -639,4 +639,57 @@ server <- function(input, output) {
   )
 })
   
+  
+  # ---- Win Rate Over Time page ----
+  build_winrate_df <- function(name, players) {
+    games <- players[[name]]
+    wins <- vapply(games, function(x) x[["Win"]] == "Yes", logical(1))
+    data.frame(
+      Player = name,
+      game_number = seq_along(wins),
+      win_rate = cumsum(wins) / seq_along(wins)
+    )
+  }
+  
+  output$winrate_plot <- renderPlot({
+    
+    selected <- c(input$wr_p1, input$wr_p2, input$wr_p3, input$wr_p4)
+    selected <- unique(selected[selected != "None selected"])
+    
+    validate(need(length(selected) > 0, "Select at least one player to display."))
+    
+    df <- purrr::map_dfr(selected, build_winrate_df, players = summary)
+    
+    ggplot(df, aes(x = game_number, y = win_rate, colour = Player)) +
+      geom_line(linewidth = 1) +
+      geom_point(size = 2) +
+      scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
+      scale_x_continuous(breaks = scales::breaks_pretty()) +
+      scale_colour_manual(
+        values = c("#C2504E", "#E6E6E6", "#EFBF04", "#B085F5")  # red, white, gold, light red
+      ) +
+      labs(
+        title    = "Win rate over time",
+        subtitle = "Cumulative win rate by number of games played",
+        x        = "Number of games played",
+        y        = "Win rate",
+        colour   = "Player"
+      ) +
+      theme_minimal(base_size = 12) +
+      theme(
+        plot.background   = element_rect(fill = "transparent", colour = NA),
+        panel.background  = element_rect(fill = "transparent", colour = NA),
+        legend.background = element_rect(fill = "transparent", colour = NA),
+        legend.key        = element_rect(fill = "transparent", colour = NA),
+        panel.grid.major  = element_line(colour = "#2A2F3A"),
+        panel.grid.minor  = element_line(colour = "#1A1D24"),
+        text          = element_text(colour = "#E6E6E6"),
+        axis.text     = element_text(colour = "#A6ADBB"),
+        axis.title    = element_text(colour = "#E6E6E6"),
+        plot.title    = element_text(colour = "#E6E6E6", face = "bold"),
+        plot.subtitle = element_text(colour = "#A6ADBB"),
+        legend.text   = element_text(colour = "#E6E6E6"),
+        legend.title  = element_text(colour = "#E6E6E6")
+      )
+  }, bg = "transparent")
 }

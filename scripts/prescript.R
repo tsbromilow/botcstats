@@ -10,6 +10,8 @@ library(DT)
 library(reactable)
 library(htmltools)
 library(htmlwidgets)
+library(ggplot2)
+
 
 ## Read in data ##
   data <- read.csv("master.csv")
@@ -276,3 +278,4 @@ library(htmlwidgets)
   size_games <- summary_by_size %>% arrange(desc(Games)) %>%
     slice(1) %>%
     pull(Games)
+  

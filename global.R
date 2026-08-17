@@ -10,6 +10,8 @@ library(DT)
 library(reactable)
 library(htmltools)
 library(htmlwidgets)
+library(ggplot2)
+
 
 options(sass.cache=FALSE)
 

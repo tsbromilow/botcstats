@@ -489,6 +489,12 @@ strong {
       display: inline !important;
     }
 
+  /* Win-rate control card shows full dropdown menus */
+  .wr-controls .card,
+  .wr-controls .bslib-card,
+  .wr-controls .card-body {
+    overflow: visible !important;
+  }
 
       ")
   
