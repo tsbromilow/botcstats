@@ -641,13 +641,24 @@ server <- function(input, output) {
   
   
   # ---- Win Rate Over Time page ----
-  build_winrate_df <- function(name, players) {
+  build_winrate_df <- function(name, players, alignment = "Overall") {
     games <- players[[name]]
+    
+    # Filter to the chosen alignment (Overall keeps everything)
+    if (alignment != "Overall") {
+      keep  <- vapply(games, function(x) x[["Alignment"]] == alignment, logical(1))
+      games <- games[keep]
+    }
+    
+    # No games of this alignment for this player -> return empty (skipped in plot)
+    if (length(games) == 0) return(NULL)
+    
     wins <- vapply(games, function(x) x[["Win"]] == "Yes", logical(1))
+    
     data.frame(
-      Player = name,
+      Player      = name,
       game_number = seq_along(wins),
-      win_rate = cumsum(wins) / seq_along(wins)
+      win_rate    = cumsum(wins) / seq_along(wins)
     )
   }
   
@@ -658,7 +669,18 @@ server <- function(input, output) {
     
     validate(need(length(selected) > 0, "Select at least one player to display."))
     
-    df <- purrr::map_dfr(selected, build_winrate_df, players = summary)
+    mode <- input$wr_mode
+    
+    # map_dfr drops NULLs automatically (players with no games of this alignment)
+    df <- purrr::map_dfr(selected, build_winrate_df, players = summary, alignment = mode)
+    
+    validate(need(nrow(df) > 0, "No games of this type for the selected player(s)."))
+    
+    # Dynamic labels based on the chosen mode
+    mode_label <- switch(mode,
+                         "Overall" = "games",
+                         "Good"    = "good games",
+                         "Evil"    = "evil games")
     
     ggplot(df, aes(x = game_number, y = win_rate, colour = Player)) +
       geom_line(linewidth = 1) +
@@ -666,12 +688,15 @@ server <- function(input, output) {
       scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
       scale_x_continuous(breaks = scales::breaks_pretty()) +
       scale_colour_manual(
-        values = c("#C2504E", "#E6E6E6", "#EFBF04", "#B085F5")  # red, white, gold, light red
+        values = c("#C2504E", "#E6E6E6", "#EFBF04", "#B085F5")  # red, white, gold, teal
       ) +
       labs(
-        title    = "Win rate over time",
-        subtitle = "Cumulative win rate by number of games played",
-        x        = "Number of games played",
+        title    = paste0(names(which(c("Overall win rate" = "Overall",
+                                        "Good win rate"    = "Good",
+                                        "Evil win rate"    = "Evil") == mode)),
+                          " over time"),
+        subtitle = paste0("Cumulative win rate by number of ", mode_label, " played"),
+        x        = paste0("Number of ", mode_label, " played"),
         y        = "Win rate",
         colour   = "Player"
       ) +

@@ -247,6 +247,14 @@ ui <- page_navbar(
                    card_header("Compare cumulative win rate for up to four players"),
                    card_body(
                      fluidRow(
+                       column(width = 12,
+                              selectInput("wr_mode", "Win rate type",
+                                          choices  = c("Overall win rate" = "Overall",
+                                                       "Good win rate"    = "Good",
+                                                       "Evil win rate"    = "Evil"),
+                                          selected = "Overall"))
+                     ),
+                     fluidRow(
                        column(width = 3,
                               selectInput("wr_p1", "Player 1",
                                           choices  = c("None selected", sort(names(summary))),
